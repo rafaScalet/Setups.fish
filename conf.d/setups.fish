@@ -15,3 +15,18 @@ else
     alias cat='bat-cat'
   end
 end
+
+# Eza setup
+if type -q eza
+  alias ls='eza --git --icons --color always --long --no-permissions --no-user --no-time --no-filesize'
+  alias la='eza --git --icons --color always --long --all'
+  alias ll='eza --git --icons --color always --long'
+  alias lt='eza --icons --color --tree'
+else
+  if type -q exa
+    alias ls='exa --git --icons --color always --long --no-permissions --no-user --no-time --no-filesize'
+    alias la='exa --git --icons --color always --long --all'
+    alias ll='exa --git --icons --color always --long'
+    alias lt='exa --icons --color --tree'
+  end
+end
