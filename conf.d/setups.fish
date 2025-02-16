@@ -30,3 +30,14 @@ else
     alias lt='exa --icons --color --tree'
   end
 end
+
+#zoxide setup
+if type -q zoxide
+  zoxide init fish --cmd cd | source
+end
+
+#thefuck setup
+if type -q thefuck
+  thefuck --alias | source
+  thefuck --alias fk | source
+end
