@@ -1,10 +1,10 @@
-# mise setup
+# Mise setup
 if type -q ~/.local/bin/mise
-  ~/.local/bin/mise activate fish | source
+  if type -q usage
+    ~/.local/bin/mise use -g usage > /dev/null
+  end
   ~/.local/bin/mise completions fish | source
-else
-  curl https://mise.run | sh
-  ~/.local/bin/mise use -g usage > /dev/null
+  ~/.local/bin/mise activate fish | source
 end
 
 # Bat-cat setup
@@ -31,13 +31,20 @@ else
   end
 end
 
-#zoxide setup
+# Zoxide setup
 if type -q zoxide
+  zoxide init fish | source
   zoxide init fish --cmd cd | source
 end
 
-#thefuck setup
+# TheFuck setup
 if type -q thefuck
   thefuck --alias | source
   thefuck --alias fk | source
+end
+
+# Fastfetch setup
+if type -q fastfetch
+  alias neofetch='fastfetch'
+  alias fetch='fastfetch'
 end
