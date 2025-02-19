@@ -1,10 +1,9 @@
+status is-interactive || exit
+
 # Mise setup
 if type -q ~/.local/bin/mise
-  if type -q usage
-    ~/.local/bin/mise use -g usage > /dev/null
-  end
-  ~/.local/bin/mise completions fish | source
   ~/.local/bin/mise activate fish | source
+  ~/.local/bin/mise completions fish | source
 end
 
 # Bat-cat setup
@@ -21,13 +20,13 @@ if type -q eza
   alias ls='eza --git --icons --color always --long --no-permissions --no-user --no-time --no-filesize'
   alias la='eza --git --icons --color always --long --all'
   alias ll='eza --git --icons --color always --long'
-  alias lt='eza --icons --color --tree'
+  alias lt='eza --icons --color always --tree'
 else
   if type -q exa
     alias ls='exa --git --icons --color always --long --no-permissions --no-user --no-time --no-filesize'
     alias la='exa --git --icons --color always --long --all'
     alias ll='exa --git --icons --color always --long'
-    alias lt='exa --icons --color --tree'
+    alias lt='exa --icons --color always --tree'
   end
 end
 
