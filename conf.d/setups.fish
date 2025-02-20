@@ -47,3 +47,8 @@ if type -q fastfetch
   alias neofetch='fastfetch'
   alias fetch='fastfetch'
 end
+
+# PNPM setup
+if type -q pnpm
+  pnpm completion fish | source
+end
