@@ -23,8 +23,18 @@ end
 
 # Bat-cat setup
 if type -q bat
+  set -l bat_completions_cache "$SETUPS_CACHE/bat_fish_completions.fish"
+  if not test -f "$bat_completions_cache"
+    bat --completion fish > "$bat_completions_cache"
+  end
+  source "$bat_completions_cache"
   alias cat='bat'
 else if ype -q bat-cat
+  set -l bat_completions_cache "$SETUPS_CACHE/bat_fish_completions.fish"
+  if not test -f "$bat_completions_cache"
+    bat-cat --completion fish > "$bat_completions_cache"
+  end
+  source "$bat_completions_cache"
   alias cat='bat-cat'
 end
 
