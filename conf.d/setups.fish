@@ -40,20 +40,18 @@ end
 # Eza/Exa setup
 if type -q eza
   alias ls='eza --git --icons --color always --long --no-permissions --no-user --no-time --no-filesize'
-  alias lst='eza --git --icons --color always --long --no-permissions --no-user --no-time --no-filesize --tree'
+  alias lss='eza'
   alias la='eza --git --icons --color always --long --all'
-  alias lat='eza --git --icons --color always --long --all --tree'
+  alias las='eza --long --all'
   alias ll='eza --git --icons --color always --long'
-  alias llt='eza --git --icons --color always --long --tree'
-  alias lt='eza --icons --color always --tree'
+  alias lls='eza --long'
 else if type -q exa
   alias ls='exa --git --icons --color always --long --no-permissions --no-user --no-time --no-filesize'
-  alias lst='exa --git --icons --color always --long --no-permissions --no-user --no-time --no-filesize --tre'
+  alias lss='exa'
   alias la='exa --git --icons --color always --long --all'
-  alias lat='exa --git --icons --color always --long --all --tree'
+  alias las='exa --long --all'
   alias ll='exa --git --icons --color always --long'
-  alias llt='exa --git --icons --color always --long --tree'
-  alias lt='exa --icons --color always --tree'
+  alias lls='exa --long'
 end
 
 # Zoxide setup
@@ -85,4 +83,34 @@ if type -q pnpm
   if not test -f "$pnpm_cache"
     pnpm completion fish > "$pnpm_cache"
   end
+end
+
+# GNU Stow setup
+if type -q stow
+  if not set -q dotfiles_dir; set -g dotfiles_dir ~/Dotfiles; end
+  if not set -q dotfiles_target; set -g dotfiles_target $HOME; end
+
+  function __dotfiles_completions
+    for dir in $dotfiles_dir/*
+      if test -d $dir
+        echo (basename $dir)
+      end
+    end
+  end
+
+  function dot --wraps=stow --description "Stow package(s) inside $dotfiles_dir"
+    stow --dir $dotfiles_dir --target "$dotfiles_target" --stow $argv
+  end
+
+  function undot --wraps=stow --description "Unstow package(s) inside $dotfiles_dir"
+    stow --dir $dotfiles_dir --target "$dotfiles_target" --delete $argv
+  end
+
+  function redot --wraps=stow --description "Restow package(s) inside $dotfiles_dir"
+    stow --dir $dotfiles_dir --target "$dotfiles_target" --restow $argv
+  end
+
+  complete -f -c dot -a "(__dotfiles_completions)"
+  complete -f -c undot -a "(__dotfiles_completions)"
+  complete -f -c redot -a "(__dotfiles_completions)"
 end
