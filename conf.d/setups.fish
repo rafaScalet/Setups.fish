@@ -114,3 +114,11 @@ if type -q stow
   complete -f -c undot -a "(__dotfiles_completions)"
   complete -f -c redot -a "(__dotfiles_completions)"
 end
+
+if type -q tldr
+  function __tldr_completions
+    tldr --list | awk '{print $1}'
+  end
+
+  complete -f -c tldr -a "(__tldr_completions)"
+end
