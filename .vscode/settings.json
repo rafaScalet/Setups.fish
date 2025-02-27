@@ -4,12 +4,14 @@
     "fastfetch",
     "fundle",
     "neofetch",
+    "newgrp",
     "redot",
     "restow",
     "thefuck",
     "tldr",
     "undot",
     "unstow",
+    "usermod",
     "zoxide"
   ]
 }

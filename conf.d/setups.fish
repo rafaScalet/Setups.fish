@@ -126,3 +126,14 @@ if type -q tldr
 
   complete -f -c tldr -a "(__tldr_completions)"
 end
+
+# docker setup
+if type -q docker
+  if not id -nG | grep -qw docker
+    sudo usermod -aG docker; and newgrp docker
+  end
+
+  if not systemctl is-active --quiet docker
+    sudo systemctl enable --now docker
+  end
+end

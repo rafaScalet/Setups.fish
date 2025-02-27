@@ -7,6 +7,7 @@ This is a plugin for the [fish shell](https://fishshell.com/), that help to work
 ## Technologies
 
 - [bat](https://github.com/sharkdp/bat)
+- [docker](https://github.com/docker/cli)
 - [eza](https://github.com/eza-community/eza)
 - [fastfetch](https://github.com/fastfetch-cli/fastfetch)
 - [GNU stow](https://github.com/gitGNU/gnu_stow)
@@ -30,6 +31,7 @@ or manually, adding [conf.d/setups.fish](./conf.d/setups.fish) into your `$__fis
 ## Setups that are made
 
 - **bat**: add alias to replace `cat` command to bat or bat-cat command, and add the completions for the options.
+- **docker**: when installed, automatic append you user into docker group and enable the service in boot.
 - **eza**: just add alias to replace `ls` and variants (like `la` and `ll`) to eza/exa, with icons, color and git informations, also adds new commands (lss, las and lls) to show in the default way.
 - **fastfetch**: just add alias to replace `neofetch` command and an alias called fetch.
 - **Gnu stow**: adds three functions, `dot`, `undot` and `redot`, wrappers for gnu stow command, that use the env var called `dotfiles_dir` and `dotfiles_target` (default for dotfiles_dir is '~/Dotfiles' and for target is '$HOME'). e.g: `dot fish` stands for `stow -d ~/Dotfiles -t $HOME fish`.
