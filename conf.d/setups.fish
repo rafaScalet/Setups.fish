@@ -24,37 +24,52 @@ if type -q usage
   end
 end
 
+# RipGrep setup
+if type -q rg
+  alias grep='rg'
+end
+
 # Bat-cat setup
 if type -q bat
-  set -l bat_completions "$__setups_dir/setups_bat_completions.fish"
-  if not test -f "$bat_completions"
-    bat --completion fish > "$bat_completions"
-  end
-  alias cat='bat'
+  set bat_cmd bat
 else if type -q batcat
+  set bat_cmd batcat
+else
+  set bat_cmd default
+end
+
+if test "$bat_cmd" != " default"
   set -l bat_completions "$__setups_dir/setups_bat_completions.fish"
   if not test -f "$bat_completions"
-    batcat --completion fish > "$bat_completions"
+    $bat_cmd --completion fish > "$bat_completions"
   end
-  alias cat='batcat'
+
+  alias cat="$bat_cmd"
+end
+
+# Bat-extras setups
+if type -q batman
+  alias man='batman'
 end
 
 # Eza/Exa setup
 if type -q eza
-  alias ls='eza --git --icons --color always --long --no-permissions --no-user --no-time --no-filesize'
-  alias lss='eza'
-  alias la='eza --git --icons --color always --long --all'
-  alias las='eza --long --all'
-  alias ll='eza --git --icons --color always --long'
-  alias lls='eza --long'
+  set eza_cmd eza
 else if type -q exa
-  alias ls='exa --git --icons --color always --long --no-permissions --no-user --no-time --no-filesize'
-  alias lss='exa'
-  alias la='exa --git --icons --color always --long --all'
-  alias las='exa --long --all'
-  alias ll='exa --git --icons --color always --long'
-  alias lls='exa --long'
+  set eza_cmd exa
+else
+  set eza_cmd default
 end
+
+if test "$eza_cmd" != "default"
+  alias ls="$eza_cmd --git --icons --color always --long --no-permissions --no-user --no-time --no-filesize"
+  alias lss="$eza_cmd"
+  alias la="$eza_cmd --git --icons --color always --long --all"
+  alias las="$eza_cmd --long --all"
+  alias ll="$eza_cmd --git --icons --color always --long"
+  alias lls="$eza_cmd --long"
+end
+
 
 # Zoxide setup
 if type -q zoxide
